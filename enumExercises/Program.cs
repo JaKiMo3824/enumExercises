@@ -16,21 +16,26 @@ namespace enumExercises
             try
             {
                 Console.WriteLine("Please type in the current day of the week.");
-                string userInput = Console.ReadLine();
-                foreach (string day in Enum.GetNames(typeof(daysOfTheWeek)))
-                {
-                    if (userInput == day)
-                    {
-                        Console.WriteLine("It is {0}.", day);
-                        
-                    }
-                   
-                }
+                string userInput = Console.ReadLine().ToLower();
+                daysOfTheWeek day = (daysOfTheWeek) Enum.Parse(typeof(daysOfTheWeek), userInput);
+                              
             }
-            catch (FormatException) //?? not sure which prewritten exception would handle for non-string input or string input not equal to  day in enum daysOfTheWeek
+            catch (FormatException ex) 
+            {
+                Console.WriteLine("Please enter an actual day of the week. " + ex.Message);
+
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Please enter an actual day of the week. " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Please enter an actual day of the week. " + ex.Message);
+            }
+            finally
             {
                 Console.WriteLine("Please enter an actual day of the week.");
-
             }
             Console.ReadLine();
 
